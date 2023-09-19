@@ -1,6 +1,4 @@
-import DATA from "./_data";
-
-const Table = () => {
+const Table = ({ data }) => {
   return (
     <table>
       <thead>
@@ -11,7 +9,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {DATA.map((eachrow, idx) => (
+        {data.map((eachrow, idx) => (
           <tr key={idx}>
             <td>{eachrow.name}</td>
             <td>{eachrow.age}</td>

@@ -1,10 +1,22 @@
+import React, { useRef } from 'react';
 
-const Input = () => {
+const Input = ({ onSearch }) => {
+  const searchRef = useRef('');
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      onSearch(searchRef.current.value);
+    }
+  };
+
+  const handleSearch = () => {
+    onSearch(searchRef.current.value);
+  };
   return (
-    <form>
-      <input type="text" placeholder="search" />
-      <button type="submit">🔍</button>
-    </form>
+    <div>
+      <input type="text" placeholder="search" ref={searchRef} onKeyPress={handleKeyPress} />
+      <button onClick={handleSearch} type="submit">🔍</button>
+    </div>
   )
 }
 

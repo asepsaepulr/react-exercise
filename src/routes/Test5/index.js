@@ -1,5 +1,6 @@
 
 import { cssWrapper } from './style';
+import React, {useState } from 'react';
 
 import Comp1 from "./Comp1";
 import Comp3 from "./Comp3";
@@ -24,23 +25,37 @@ const question = (
     <li>update whole <code>input</code> and value render when user input <code>#mynumber2</code></li>
   </ul>
 );
+const globalData = {
+  sharedValue: 0,
+};
 
 const Test5 = () => {
+  const [myNumber, setMyNumber] = useState(0);
+  //const [inputValueComp2, setInputValueComp2] = useState('');
+  const handleNumberChange = (newValue) => {
+    setMyNumber(newValue);
+    globalData.sharedValue = newValue;
+  };
   return(
-    <div>
+    <>
       {question}
-      <button id="numbermin" type="button">-</button>
-      <input id="mynumber" type="text" placeholder="input mynumber"/>
-      <button id="numberplus" type="button">+</button>
+      <button id="numbermin" type="button" onClick={() => handleNumberChange(myNumber - 1)}>-</button>
+      <input id="mynumber" type="text" placeholder="input mynumber" value={myNumber}
+          onChange={(e) => setMyNumber(parseInt(e.target.value))}/>
+      <button id="numberplus" type="button"   onClick={() => handleNumberChange(myNumber + 1)}>+</button>
       <br/>
       <br/>
       <div className={cssWrapper}>
-        The inputted value is [ODD / EVEN]*
+        The inputted value is {myNumber % 2 === 0 ? 'EVEN' : 'ODD'}
       </div>
-      <Comp1 />
+      <Comp1
+         />
       <Comp3 />
-    </div>
+      </>
   )
+}
+export function getSharedValue() {
+  return globalData.sharedValue;
 }
 
 export default Test5;

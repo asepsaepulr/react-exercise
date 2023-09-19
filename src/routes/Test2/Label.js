@@ -1,4 +1,6 @@
+import React, { useState, useEffect } from 'react';
 import { css } from 'react-emotion';
+import './style.css';
 
 const cssLabel = css({
   display: 'inline-block',
@@ -17,11 +19,23 @@ const cssLabel = css({
   }
 })
 
-const Label = () => {
+const Label = ({ receivedData }) => {
+  
+  const [inputValue, setInputValue] = useState(receivedData);
+
+  useEffect(() => { 
+    setInputValue(receivedData);
+  }, [receivedData]);
+
+  const handleClearValue = (valueToClear) => () => {
+    setInputValue(valueToClear);
+  };
   return (
     <span className={cssLabel}>
-      RENDER VALUE HERE
-      <button type="button">⊗</button>
+      <span className='hover-label'>
+     {inputValue}
+      <button className="hover-button" onClick={handleClearValue('')} type="button">⊗</button>
+    </span>
     </span>
   )
 }

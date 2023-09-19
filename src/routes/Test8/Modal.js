@@ -1,15 +1,18 @@
 import { cssModal } from "./style"
 
-const Modal = () => {
+const Modal = ({ isOpen, onReset, children, data }) => {
+  if (!isOpen) {
+    return null;
+  }
   return (
     <div className={cssModal}>
-      Name: _____
+      Name:  {data.name}
       <br/>
-      Age: _____
+      Age: {data.age}
       <br/>
-      Address: _____
+      Address: {data.address}
       <br/>
-      <button>Reset</button>
+      <button onClick={onReset}>Reset</button>
     </div>
   );
 };

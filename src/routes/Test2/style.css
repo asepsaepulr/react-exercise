@@ -1,0 +1,14 @@
+.hover-label {
+    /* Add label styles as needed */
+    cursor: pointer;
+  }
+  
+  .hover-button {
+    /* Add button styles as needed */
+    display: none;
+  }
+  
+  .hover-label:hover .hover-button {
+    display: inline-block;
+  }
+  
